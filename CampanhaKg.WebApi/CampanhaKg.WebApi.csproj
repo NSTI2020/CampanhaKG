@@ -3,7 +3,9 @@
   <ItemGroup>
     <ProjectReference Include="..\CampanhaKg.Domain\CampanhaKg.Domain.csproj" />
     <ProjectReference Include="..\CampanhaKg.Repository\CampanhaKg.Repository.csproj" />
+  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.0" />
   </ItemGroup>
+  
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>

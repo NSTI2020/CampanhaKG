@@ -10,6 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using CampanhaKg.Repository.Data;
+using Microsoft.EntityFrameworkCore;
+using CampanhaKg.Repository;
 
 namespace CampanhaKg.WebApi
 {
@@ -25,7 +28,14 @@ namespace CampanhaKg.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddScoped<ICampRepository, CampRepository>();
+
+
             services.AddControllers();
+            services.AddDbContext<CampaignContext>(MySql =>
+             MySql.UseMySql(Configuration.GetConnectionString("CampaingData"),
+             migration => migration.MigrationsAssembly("CampanhaKg.WebApi")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,8 +46,8 @@ namespace CampanhaKg.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
-
+            // app.UseHttpsRedirection();
+            app.UseStaticFiles();
             app.UseRouting();
 
             app.UseAuthorization();

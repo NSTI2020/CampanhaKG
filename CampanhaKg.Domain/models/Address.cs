@@ -2,6 +2,11 @@ namespace CampanhaKg.Domain.models
 {
     public class Address
     {
+        public Address()
+        {
+
+        }
+        public int Id { get; set; }
         public string Rua { get; set; }
         public string Numero { get; set; }
         public string Complemento { get; set; }
@@ -9,14 +14,6 @@ namespace CampanhaKg.Domain.models
         public string Cidade { get; set; }
         public string UF { get; set; }
         public string ZipCode { get; set; }
-        public Address(string rua, string complemento, string bairro, string cidade, string uF, string zipCode)
-        {
-            Rua = rua;
-            Complemento = complemento;
-            Bairro = bairro;
-            Cidade = cidade;
-            UF = uF;
-            ZipCode = zipCode;
-        }
+
     }
 }
