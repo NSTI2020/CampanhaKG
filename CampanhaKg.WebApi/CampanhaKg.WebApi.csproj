@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <ProjectReference Include="..\CampanhaKg.Domain\CampanhaKg.Domain.csproj" />
+    <ProjectReference Include="..\CampanhaKg.Repository\CampanhaKg.Repository.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+
+</Project>
