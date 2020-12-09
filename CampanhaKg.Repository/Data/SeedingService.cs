@@ -5,7 +5,6 @@ namespace CampanhaKg.Repository.Data
 {
     public class SeedingService
     {
-
         private readonly CampaignContext _context;
 
         public SeedingService(CampaignContext context)

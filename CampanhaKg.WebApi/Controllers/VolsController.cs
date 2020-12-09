@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using CampanhaKg.Domain.models;
+using Microsoft.AspNetCore.Http;
 
 namespace CampanhaKg.WebApi.Controllers
 {
@@ -16,20 +17,33 @@ namespace CampanhaKg.WebApi.Controllers
     [Route("api/[controller]")]
     public class VolsController : ControllerBase
     {
-        private readonly CampaignContext _context;
-
-
+        private readonly ICampRepository _repo;
         public SeedingService _seeding { get; set; }
-        public VolsController(SeedingService seeding)
-        { _seeding = seeding; }
 
 
-
+        public VolsController(SeedingService seeding, ICampRepository repo)
+        {
+            _seeding = seeding;
+            _repo = repo;
+        }
 
         [HttpGet]
-        public ActionResult<IEnumerable<string>> get()
+        public async Task<IActionResult> get()
         {
-            return new string[] { "sssss", "aaaaaaaa" };
+            try
+            {
+                Voluntary[] VolunteersResult = await _repo.GetAllVolunteersAsync();
+
+                if (VolunteersResult != null)
+                {
+                    return Ok(VolunteersResult);
+                }
+            }
+            catch (SystemException)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "O banco de dados falhou");
+            }
+            return BadRequest();
         }
 
         [HttpGet("{seed}")]
