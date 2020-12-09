@@ -10,7 +10,7 @@ namespace CampanhaKg.Repository.Data
 
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Fraternity> Fraternities { get; set; }
-        public DbSet<Voluntary> Voluntaries { get; set; }
+        public DbSet<Voluntary> Volunteers { get; set; }
         public DbSet<Campaign> Campaigns { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {

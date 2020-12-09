@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CampanhaKg.WebApi.Migrations
 {
     [DbContext(typeof(CampaignContext))]
-    [Migration("20201209122754_Init")]
+    [Migration("20201209125819_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -132,18 +132,18 @@ namespace CampanhaKg.WebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("AddressesId")
+                    b.Property<int>("AddressId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("VoluntaryId")
+                    b.Property<int?>("VoluntaryId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressesId");
+                    b.HasIndex("AddressId");
 
                     b.HasIndex("VoluntaryId");
 
@@ -167,7 +167,7 @@ namespace CampanhaKg.WebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Voluntaries");
+                    b.ToTable("Volunteers");
                 });
 
             modelBuilder.Entity("CampanhaKg.Domain.models.Campaign", b =>
@@ -185,15 +185,15 @@ namespace CampanhaKg.WebApi.Migrations
 
             modelBuilder.Entity("CampanhaKg.Domain.models.Fraternity", b =>
                 {
-                    b.HasOne("CampanhaKg.Domain.models.Address", "Addresses")
+                    b.HasOne("CampanhaKg.Domain.models.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("AddressesId");
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CampanhaKg.Domain.models.Voluntary", "Voluntary")
                         .WithMany()
-                        .HasForeignKey("VoluntaryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("VoluntaryId");
                 });
 #pragma warning restore 612, 618
         }

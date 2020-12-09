@@ -12,8 +12,9 @@ namespace CampanhaKg.Domain.models
         public string Name { get; set; }
         public List<Campaign> Locations { get; set; }
         public Voluntary Voluntary { get; set; }
-        public Address Addresses { get; set; }
-        public int VoluntaryId { get; set; }
+        public int AddressId { get; set; }
+        public Address Address { get; set; }
+
 
 
     }

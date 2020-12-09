@@ -28,7 +28,7 @@ namespace CampanhaKg.WebApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Voluntaries",
+                name: "Volunteers",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -39,7 +39,7 @@ namespace CampanhaKg.WebApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Voluntaries", x => x.Id);
+                    table.PrimaryKey("PK_Volunteers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -49,24 +49,24 @@ namespace CampanhaKg.WebApi.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
-                    AddressesId = table.Column<int>(nullable: true),
-                    VoluntaryId = table.Column<int>(nullable: false)
+                    VoluntaryId = table.Column<int>(nullable: true),
+                    AddressId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Fraternities", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Fraternities_Addresses_AddressesId",
-                        column: x => x.AddressesId,
+                        name: "FK_Fraternities_Addresses_AddressId",
+                        column: x => x.AddressId,
                         principalTable: "Addresses",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Fraternities_Voluntaries_VoluntaryId",
-                        column: x => x.VoluntaryId,
-                        principalTable: "Voluntaries",
-                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Fraternities_Volunteers_VoluntaryId",
+                        column: x => x.VoluntaryId,
+                        principalTable: "Volunteers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -124,9 +124,9 @@ namespace CampanhaKg.WebApi.Migrations
                 column: "FraternityId1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Fraternities_AddressesId",
+                name: "IX_Fraternities_AddressId",
                 table: "Fraternities",
-                column: "AddressesId");
+                column: "AddressId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Fraternities_VoluntaryId",
@@ -146,7 +146,7 @@ namespace CampanhaKg.WebApi.Migrations
                 name: "Addresses");
 
             migrationBuilder.DropTable(
-                name: "Voluntaries");
+                name: "Volunteers");
         }
     }
 }
