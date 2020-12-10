@@ -32,6 +32,9 @@ namespace CampanhaKg.WebApi.Migrations
                     b.Property<string>("Complemento")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<string>("Icon")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("Numero")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -63,6 +66,9 @@ namespace CampanhaKg.WebApi.Migrations
 
                     b.Property<int?>("FraternityId1")
                         .HasColumnType("int");
+
+                    b.Property<string>("Icon")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Neighborhood")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -133,10 +139,13 @@ namespace CampanhaKg.WebApi.Migrations
                     b.Property<int>("AddressId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Icon")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int?>("VoluntaryId")
+                    b.Property<int>("VoluntaryId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -160,6 +169,9 @@ namespace CampanhaKg.WebApi.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<string>("Icon")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -177,7 +189,7 @@ namespace CampanhaKg.WebApi.Migrations
                         .IsRequired();
 
                     b.HasOne("CampanhaKg.Domain.models.Fraternity", null)
-                        .WithMany("Locations")
+                        .WithMany("Campaigns")
                         .HasForeignKey("FraternityId1");
                 });
 
@@ -191,7 +203,9 @@ namespace CampanhaKg.WebApi.Migrations
 
                     b.HasOne("CampanhaKg.Domain.models.Voluntary", "Voluntary")
                         .WithMany()
-                        .HasForeignKey("VoluntaryId");
+                        .HasForeignKey("VoluntaryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

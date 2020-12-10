@@ -14,6 +14,7 @@ namespace CampanhaKg.Domain.models
         public string Cidade { get; set; }
         public string UF { get; set; }
         public string ZipCode { get; set; }
+        public string Icon { get; set; }
 
     }
 }

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CampanhaKg.WebApi.Migrations
 {
-    public partial class Init : Migration
+    public partial class classfigureremovedandaddediconfield : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,7 +20,8 @@ namespace CampanhaKg.WebApi.Migrations
                     Bairro = table.Column<string>(nullable: true),
                     Cidade = table.Column<string>(nullable: true),
                     UF = table.Column<string>(nullable: true),
-                    ZipCode = table.Column<string>(nullable: true)
+                    ZipCode = table.Column<string>(nullable: true),
+                    Icon = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -35,7 +36,8 @@ namespace CampanhaKg.WebApi.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
-                    Contato = table.Column<string>(nullable: true)
+                    Contato = table.Column<string>(nullable: true),
+                    Icon = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -49,8 +51,9 @@ namespace CampanhaKg.WebApi.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
-                    VoluntaryId = table.Column<int>(nullable: true),
-                    AddressId = table.Column<int>(nullable: false)
+                    VoluntaryId = table.Column<int>(nullable: false),
+                    AddressId = table.Column<int>(nullable: false),
+                    Icon = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -66,7 +69,7 @@ namespace CampanhaKg.WebApi.Migrations
                         column: x => x.VoluntaryId,
                         principalTable: "Volunteers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -94,6 +97,7 @@ namespace CampanhaKg.WebApi.Migrations
                     Street013 = table.Column<string>(nullable: true),
                     Street014 = table.Column<string>(nullable: true),
                     Street015 = table.Column<string>(nullable: true),
+                    Icon = table.Column<string>(nullable: true),
                     FraternityId1 = table.Column<int>(nullable: true)
                 },
                 constraints: table =>

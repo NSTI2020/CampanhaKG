@@ -15,6 +15,7 @@ namespace CampanhaKg.Domain.models
         public Voluntary Voluntary { get; set; }
         public int AddressId { get; set; }
         public Address Address { get; set; }
+        public string Icon { get; set; }
 
 
 

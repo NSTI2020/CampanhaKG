@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CampanhaKg.WebApi.Migrations
 {
     [DbContext(typeof(CampaignContext))]
-    [Migration("20201209125819_Init")]
-    partial class Init
+    [Migration("20201210171224_class figure removed and added icon field")]
+    partial class classfigureremovedandaddediconfield
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,6 +32,9 @@ namespace CampanhaKg.WebApi.Migrations
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Complemento")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Icon")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Numero")
@@ -65,6 +68,9 @@ namespace CampanhaKg.WebApi.Migrations
 
                     b.Property<int?>("FraternityId1")
                         .HasColumnType("int");
+
+                    b.Property<string>("Icon")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Neighborhood")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -135,10 +141,13 @@ namespace CampanhaKg.WebApi.Migrations
                     b.Property<int>("AddressId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Icon")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int?>("VoluntaryId")
+                    b.Property<int>("VoluntaryId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -162,6 +171,9 @@ namespace CampanhaKg.WebApi.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<string>("Icon")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -179,7 +191,7 @@ namespace CampanhaKg.WebApi.Migrations
                         .IsRequired();
 
                     b.HasOne("CampanhaKg.Domain.models.Fraternity", null)
-                        .WithMany("Locations")
+                        .WithMany("Campaigns")
                         .HasForeignKey("FraternityId1");
                 });
 
@@ -193,7 +205,9 @@ namespace CampanhaKg.WebApi.Migrations
 
                     b.HasOne("CampanhaKg.Domain.models.Voluntary", "Voluntary")
                         .WithMany()
-                        .HasForeignKey("VoluntaryId");
+                        .HasForeignKey("VoluntaryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
