@@ -1,4 +1,5 @@
 using CampanhaKg.Domain.models;
+using CampanhaKg.Domain.Appearance;
 using Microsoft.EntityFrameworkCore;
 
 namespace CampanhaKg.Repository.Data
@@ -12,6 +13,7 @@ namespace CampanhaKg.Repository.Data
         public DbSet<Fraternity> Fraternities { get; set; }
         public DbSet<Voluntary> Volunteers { get; set; }
         public DbSet<Campaign> Campaigns { get; set; }
+        public DbSet<Figure> Figures { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Fraternity>()

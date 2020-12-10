@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { VolunteersComponent } from './volunteers/volunteers.component';
 import { HttpClientModule } from '@angular/common/http';
 import { VoluntaryService } from './_services/voluntary.service';
+import { NavComponent } from './nav/nav.component';
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
-    VolunteersComponent
-  ],
+    VolunteersComponent,
+      NavComponent
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,

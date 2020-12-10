@@ -1,10 +1,40 @@
-<p>
-  {{volunteers[0].name}}
-</p>
-<p>
-  {{volunteers[1].email}}
-</p>
-<p>
-  {{volunteers[1].contato}}
-</p>
 
+
+<form class="form-inline mr-auto">
+  <div class="form-group mb-2">
+    <input type="text" class="form-control mr-2">
+    <button class="btn btn-outline-success">Buscar</button>
+  </div>
+</form>
+
+<table class="table table-striped">
+<thead class="thead-light">
+  <tr>
+    <th>#</th>
+    <th>Nome</th>
+    <th>Email</th>
+    <th>Contato</th>
+    <th></th>
+  </tr>
+</thead>
+<tbody *ngIf="volunteers && volunteers.length">
+  <tr *ngFor="let vol of volunteers">
+    <td>{{vol.id}}</td>
+    <td>{{vol.name}}</td>
+    <td>{{vol.email}}</td>
+    <td>{{vol.contato}}</td>
+    <td>
+    <button class="btn btn-success"></button>
+    <button class="btn btn-danger"></button>
+    </td>
+  </tr>
+</tbody>
+<tfoot *ngIf="!volunteers">
+<td colspan="7" class="text-center">
+  <h4>
+Campanha não encontrada.
+  </h4>
+</td>
+</tfoot>
+
+</table>
