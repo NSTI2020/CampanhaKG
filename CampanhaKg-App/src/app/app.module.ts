@@ -3,16 +3,23 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { VolunteersComponent } from './volunteers/volunteers.component';
+import { HttpClientModule } from '@angular/common/http';
+import { VoluntaryService } from './_services/voluntary.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    VolunteersComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    VoluntaryService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

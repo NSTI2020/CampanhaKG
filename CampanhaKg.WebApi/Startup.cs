@@ -30,7 +30,11 @@ namespace CampanhaKg.WebApi
         {
             services.AddScoped<ICampRepository, CampRepository>();
             services.AddScoped<SeedingService>();
+
             services.AddControllers();
+
+            services.AddCors();
+
             services.AddDbContext<CampaignContext>(MySql =>
              MySql.UseMySql(Configuration.GetConnectionString("CampaingData"),
              migration => migration.MigrationsAssembly("CampanhaKg.WebApi")));
@@ -47,6 +51,8 @@ namespace CampanhaKg.WebApi
             }
 
             // app.UseHttpsRedirection();
+            app.UseCors(Cors => Cors.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+
             app.UseStaticFiles();
             app.UseRouting();
 
