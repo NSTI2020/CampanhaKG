@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
+using CampanhaKg.Domain._visual;
 using CampanhaKg.Domain.models;
 using CampanhaKg.Repository.Data;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +16,7 @@ namespace CampanhaKg.Repository
         }
 
 
-        //GERAL
+        //All
         public void Add<T>(T entity) where T : class
         {
             _context.Add(entity);
@@ -35,6 +36,18 @@ namespace CampanhaKg.Repository
         public async Task<bool> SaveChangesAsync()
         {
             return await _context.SaveChangesAsync() > 0;
+        }
+
+
+        //All  gets
+        public async Task<Image[]> GetAllImagens()
+        {
+            IQueryable<Image> query = _context.Images
+            .AsNoTracking()
+            .OrderBy(id => id.id);
+
+            return await query.ToArrayAsync();
+
         }
 
 

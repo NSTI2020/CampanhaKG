@@ -25,6 +25,6 @@ namespace CampanhaKg.Domain.models
         public string Street013 { get; set; }
         public string Street014 { get; set; }
         public string Street015 { get; set; }
-        public string Icon { get; set; }
+        public string photo { get; set; }
     }
 }

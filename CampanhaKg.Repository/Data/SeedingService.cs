@@ -1,4 +1,5 @@
 using System.Linq;
+using CampanhaKg.Domain._visual;
 using CampanhaKg.Domain.models;
 
 namespace CampanhaKg.Repository.Data
@@ -15,7 +16,7 @@ namespace CampanhaKg.Repository.Data
         public SeedingService()
         {
         }
-        public void Seed()
+        public bool Seed()
         {
             Voluntary voluntary1 = new Voluntary
             {
@@ -212,7 +213,17 @@ namespace CampanhaKg.Repository.Data
                 Street05 = "Navegantes"
             };
 
-            _context.Volunteers.Add(voluntary1);
+            Image img = new Image()
+            {
+                VoluntaryIcon = "volicon.png",
+                FraternityIcon = "fraticon.png",
+                CampaignIcon = "campicon.png",
+                AddresssIcon = "addressicon.png"
+            };
+
+
+            _context.Add(img);
+            _context.Add(voluntary1);
             _context.Add(voluntary2);
             _context.Add(voluntary3);
             _context.Add(voluntary4);
@@ -230,16 +241,13 @@ namespace CampanhaKg.Repository.Data
             _context.Add(campaign4);
             _context.Add(campaign5);
 
-            _context.SaveChanges();
+            if (_context.Volunteers.Any() && _context.Fraternities.Any() && _context.Addresses.Any())
+            {
+                return false;
+            }
 
+
+            return _context.SaveChanges() > 0;
         }
-
-
-
-
-
-
-
-
     }
 }

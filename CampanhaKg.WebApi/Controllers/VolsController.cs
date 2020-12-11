@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using CampanhaKg.Repository;
+using CampanhaKg.Domain._visual;
 using CampanhaKg.Repository.Data;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,12 +19,9 @@ namespace CampanhaKg.WebApi.Controllers
     public class VolsController : ControllerBase
     {
         private readonly ICampRepository _repo;
-        public SeedingService _seeding { get; set; }
-
-
-        public VolsController(SeedingService seeding, ICampRepository repo)
+        public VolsController(ICampRepository repo)
         {
-            _seeding = seeding;
+
             _repo = repo;
         }
 
@@ -46,16 +44,31 @@ namespace CampanhaKg.WebApi.Controllers
             return BadRequest();
         }
 
-        [HttpGet("{seed}")]
-        public ActionResult<IEnumerable<string>> get(string seed)
+        [HttpGet("GetImg/{img}")]
+        public async Task<IActionResult> get(int img)
         {
-            if (seed.ToLower().Contains("ok"))
+            try
             {
-                _seeding.Seed();
+                Image[] figures = await _repo.GetAllImagens();
+
+                if (figures != null)
+                {
+                    return Ok(figures);
+                }
             }
-            return new string[] { "Seeded", "Seeded" };
+            catch (System.Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "A base de dados falhou!");
+            }
+            return BadRequest();
 
         }
+
+
+
+
+
+
 
     }
 

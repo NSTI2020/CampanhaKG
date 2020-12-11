@@ -11,7 +11,7 @@ namespace CampanhaKg.Domain.models
         public string Name { get; set; }
         public string Email { get; set; }
         public string Contato { get; set; }
-        public string Icon { get; set; }
+        public string photo { get; set; }
 
 
     }
