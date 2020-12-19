@@ -64,6 +64,70 @@ namespace CampanhaKg.WebApi.Controllers
 
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Post(Voluntary model)
+        {
+            try
+            {
+                _repo.Add(model);
+                if (await _repo.SaveChangesAsync())
+                {
+                    return Created($"/api/vols/{model.Id}", model);
+                }
+            }
+            catch (System.Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "A base de dados falhou!");
+            }
+            return BadRequest();
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, Voluntary model)
+        {
+            try
+            {
+                Voluntary vol = await _repo.GetVolunteersByIdAsync(id);
+                if (vol == null) return NotFound();
+                _repo.Update(model);
+                if (await _repo.SaveChangesAsync())
+                {
+                    return Created($"/api/vols/{id}", model);
+                }
+
+            }
+            catch (System.Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "A base de dados falhou.");
+            }
+            return NotFound();
+        }
+
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                Voluntary vol = await _repo.GetVolunteersByIdAsync(id);
+                if (vol == null) return NotFound();
+                _repo.Delete(vol);
+
+                if (await _repo.SaveChangesAsync())
+                {
+                    return Created($"/api/vols/{id}", vol);
+                }
+
+
+
+            }
+            catch (System.Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "A base de dados falhou.");
+            }
+
+            return NotFound();
+        }
 
 
 
@@ -71,5 +135,4 @@ namespace CampanhaKg.WebApi.Controllers
 
 
     }
-
 }

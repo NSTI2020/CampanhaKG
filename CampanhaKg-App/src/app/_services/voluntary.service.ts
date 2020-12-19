@@ -13,13 +13,15 @@ export class VoluntaryService {
 
   baseURL = 'http://localhost:5000/api/vols';
   baseURLImg = 'http://localhost:5000/api/vols/getimg/1';
+
+
   Volunteers: Voluntary;
 
   GetAllVoluntary(): Observable<Voluntary[]> {
     return this.http.get<Voluntary[]>(this.baseURL);
   }
 
-  GetAllVoluntaryById(id: number): Observable<Voluntary[]> {
+  GetVoluntaryById(id: number): Observable<Voluntary[]> {
     return this.http.get<Voluntary[]>(`${this.baseURL}/${id}`);
   }
 
@@ -27,7 +29,16 @@ export class VoluntaryService {
     return this.http.get<Image[]>(this.baseURLImg)
   }
 
+  postVoluntary(voluntary: Voluntary) {
+    return this.http.post(this.baseURL, voluntary)
+  }
 
+  DeleteVoluntary(voluntary: Voluntary) {
+    return this.http.delete(`${this.baseURL}/${voluntary.id}`);
+  }
 
+  putVoluntary(voluntary: Voluntary) {
+    return this.http.put(`${this.baseURL}/${voluntary.id}`, voluntary);
+  }
 
 }

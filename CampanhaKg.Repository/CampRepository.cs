@@ -102,9 +102,11 @@ namespace CampanhaKg.Repository
 
             return await query.ToArrayAsync();
         }
-        public Task<Voluntary> GetAllVolunteersByIdAsync(int id)
+        public async Task<Voluntary> GetVolunteersByIdAsync(int id)
         {
-            throw new System.NotImplementedException();
+            IQueryable<Voluntary> query = _context.Volunteers
+            .AsNoTracking().Where(i => i.Id ==id);
+            return await query.FirstOrDefaultAsync();
         }
 
 

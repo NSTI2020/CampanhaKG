@@ -20,7 +20,7 @@ namespace CampanhaKg.Repository.Data
 
         //Volunteers
         Task<Voluntary[]> GetAllVolunteersAsync();
-        Task<Voluntary> GetAllVolunteersByIdAsync(int id);
+        Task<Voluntary> GetVolunteersByIdAsync(int id);
 
 
         //Fraternity
