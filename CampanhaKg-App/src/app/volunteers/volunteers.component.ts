@@ -7,24 +7,15 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ToastrService } from 'ngx-toastr';
 
 
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition,
-  // ...
-} from '@angular/animations';
-
-
-
-
 @Component({
   selector: 'app-volunteers',
   templateUrl: './volunteers.component.html',
   styleUrls: ['./volunteers.component.scss']
 })
 export class VolunteersComponent implements OnInit {
+
+  //title
+  title: string = 'Voluntários';
 
   //SavaChanges
   voluntary: Voluntary;

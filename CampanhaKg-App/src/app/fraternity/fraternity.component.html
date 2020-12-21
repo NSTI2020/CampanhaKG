@@ -1,3 +1,4 @@
+<app-title [title]="title"></app-title>
 <div class="d-flex">
 	<div class="form-inline mr-auto">
 <div class="form-group mb-2">
@@ -15,15 +16,12 @@
 </div>
 </div>
 <h1>{{filteringString}}</h1>
-
 <table class="table table-striped">
     <thead class="thead-light">
 <tr>
-    <th>Nome:</th>
-    <th>Voluntário:</th>
-    <th>Bairro:</th>
-    <th>Foto:</th>
-    <th>Campanhas:</th>
+    <th>Fraternidade:</th>
+    <th>Responsável:</th>
+    <th>Endereço:</th>
     <th></th>
 </tr>
     </thead>
@@ -35,8 +33,9 @@
             {{fraty.voluntary.name}}
         </td>
         <td>
-            {{fraty.address.bairro}}
+            {{fraty.bairro}}
         </td>
+       
 
     </tbody>
 </table>
@@ -46,13 +45,188 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 id="dialog-sizes-name1" class="modal-title pull-left">Large modal</h4>
+        <h4 id="dialog-sizes-name1" class="modal-title pull-left">Cadastro de fraternidade</h4>
         <button type="button" class="close pull-right" (click)="modalFraternity.hide()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-          Modal body here.
+
+
+
+
+
+<form [formGroup]="registerForm">
+<div class="form-group col-md-12 text-center">
+<h5>
+    <label>CEP:</label>
+</h5>
+</div><!-- /form-group-->
+<div class="form-row">
+<div class="form-group col-md-12">
+<input type="text" class="form-control text-center"
+placeholder="Ao introduzir o cep, os campos Rua, Bairro, Cidade, Estado são automaticamente completados.">
+
+
+</div><!-- /form-group -->
+</div><!-- /form-row -->
+        
+ 
+    <!--FRAT/VOL--->
+<div class="form-row">
+    <!--Fraternity--->
+<div class="form-group col-md-6">
+<label>Fraternidade:</label>
+<input type="text" class="form-control" 
+[ngClass]="{'is-invalid': registerForm.get('name').errors && registerForm.get('name').touched}"
+formControlName="name" placeholder="Nome da fraternidade.">
+<!--VALIDATORS name-->
+<div *ngIf="registerForm.get('name').hasError('required')" class="invalid-feedback">
+Nome da fraternidade é de preenchimento obrigatório.
+</div>
+
+<div *ngIf="registerForm.get('name').hasError('minlength')" class="invalid-feedback">
+    Nome deve ter no mínimo 3 caracteres.
+</div>
+
+
+<div *ngIf="registerForm.get('name').hasError('maxlength')" class="invalid-feedback">
+Nome deve conter no máximo 100 caracteres.
+</div>
+
+
+</div><!-- /form-group -->
+    <!--Voluntary--->
+<div class="form-group col-md-6">
+<label>Voluntário:</label>
+<input type="text" class="form-control" placeholder="Selecione o voluntário">
+
+</div><!-- /form-group -->
+</div><!-- /form-row -->
+
+
+    <!--RUA/NUMERO--->
+<div class="form-row">
+    <!--Rua--->
+<div class="form-group col-md-6">
+<label>Rua:</label>
+<input type="text" class="form-control" 
+[ngClass]="{'is-invalid': registerForm.get('rua').errors && registerForm.get('rua').touched}"
+formControlName="rua" placeholder="Rua...">
+
+<div *ngIf="registerForm.get('rua').hasError('required') && registerForm.get('rua').touched" class="invalid-feedback">
+    Rua é de preenchimento obrigatório.
+</div>
+
+<div *ngIf="registerForm.get('rua').hasError('maxlength')" class="invalid-feedback">
+    Rua deve conter no máximo 100 caracteres.
+</div>
+
+</div><!-- /form-group -->
+    <!--Número--->
+<div class="form-group col-md-6">
+<label>Número:</label>
+<input type="text" class="form-control" 
+[ngClass]="{'is-invalid': registerForm.get('numero').errors && registerForm.get('numero').touched}"
+formControlName="numero" placeholder="Número...">
+
+<div *ngIf="registerForm.get('numero').hasError('required') && registerForm.get('numero').touched" class="invalid-feedback">
+    Número é de preenchimento obrigatório.
+</div>
+
+<div *ngIf="registerForm.get('numero').hasError('maxlength')" class="invalid-feedback">
+    Número deve conter no máximo 10 caracteres.
+</div>
+
+</div><!-- /form-group -->
+</div><!-- /form-row -->
+
+
+    <!--BAIRRO/CIDADE--->
+<div class="form-row">
+    <!--Bairro--->
+<div class="form-group col-md-6">
+<label>Bairro:</label>
+<input type="text" class="form-control" 
+[ngClass]="{'is-invalid': registerForm.get('bairro').errors && registerForm.get('bairro').touched}"
+formControlName="bairro" placeholder="Bairro...">
+
+<div *ngIf="registerForm.get('bairro').hasError('required') && registerForm.get('bairro').touched" class="invalid-feedback">
+   Bairro é de preenchimento obrigatório.
+</div>
+
+<div *ngIf="registerForm.get('bairro').hasError('maxlength')" class="invalid-feedback">
+    Bairro deve conter no máximo 100 caracteres.
+</div>
+
+</div><!-- /form-group -->
+    <!--Cidade--->
+<div class="form-group col-md-6">
+<label>Cidade:</label>
+<input type="text" class="form-control" 
+[ngClass]="{'is-invalid': registerForm.get('cidade').errors && registerForm.get('cidade').touched}"
+formControlName="cidade" placeholder="Cidade...">
+
+<div *ngIf="registerForm.get('cidade').hasError('required') && registerForm.get('cidade').touched" class="invalid-feedback">
+   Cidade é de preenchimento obrigatório.
+</div>
+
+<div *ngIf="registerForm.get('cidade').hasError('maxlength')" class="invalid-feedback">
+    Cidade deve conter no máximo 100 caracteres.
+</div>
+
+</div><!-- /form-group -->
+</div><!-- /form-row -->
+
+
+    <!--ESTADO/COMPLEMENTO--->
+<div class="form-row">
+    <!--Estado--->
+<div class="form-group  col-md-6">
+<label>Estado:</label>
+<input type="text" class="form-control" 
+[ngClass]="{'is-invalid': registerForm.get('estado').errors && registerForm.get('estado').touched}"
+formControlName="estado" placeholder="Estado...">
+
+<div *ngIf="registerForm.get('estado').hasError('required') && registerForm.get('estado').touched" class="invalid-feedback">
+  Estado é de preenchimento obrigatório.
+</div>
+
+<div *ngIf="registerForm.get('estado').hasError('maxlength')" class="invalid-feedback">
+    Estado deve conter no máximo 100 caracteres.
+</div>
+
+</div><!-- /form-group -->
+    <!--Complemento--->
+<div class="form-group col-md-6">
+<label>Complemento:</label>
+<input type="text" class="form-control">
+
+</div><!-- /form-group -->
+</div><!-- /form-row -->
+
+<!--BUTTONS CLOSE SAVE-->
+<div class="form-row">
+<!--close button-->
+<div class="form-group col-md-4">
+<button type="button" class="form-control">Fechar</button>
+</div>
+<!--SPACE BETWEEN BUTTONS-->
+<div class="form-gropu col-md-4">
+</div>
+
+<!--sava button-->
+<div class="form-gropu col-md-4">
+<button type="button" class="form-control">Salvar</button>
+</div>
+
+</div><!-- /form-row -->
+
+
+</form>
+
+
+
 <br>
 <div class="modal-footer d-flex">
 </div>
@@ -63,69 +237,3 @@
   </div>
 </div>
     
-
-
-
-<div [formGroup]="registerForm">
-
-    <!-- ZipCode -->
-    <div class="form-row">
-        <div class="form-group col-md-12">
-        <label>CEP:</label>
-        <input type="text" class="form-control">
-    </div>
-    </div>
-
-<div class="form-row">
-    <!-- Fraternity name -->
-    <div class="form-group col-md-6">
-    <label>Fraternidade:</label>
-    <input class="form-control is-invalid" type="text" placeholder="Nome...">
-    <!-- Voluntary name -->
-</div>
-
-
-<div class="form-group col-md-6">
-<div class="btn-group" dropdown container="body">
-    <button id="button-container" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
-            aria-controls="dropdown-container">
-      Voluntário <span class="caret"></span>
-    </button>
-    <ul id="dropdown-container" *dropdownMenu class="dropdown-menu"
-        role="menu" aria-labelledby="button-container">
-      <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
-      <li role="menuitem"><a class="dropdown-item" href="#">Another action</a></li>
-      <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
-      <li class="divider dropdown-divider"></li>
-      <li role="menuitem"><a class="dropdown-item" href="#">Separated link</a>
-      </li>
-    </ul>
-  </div>
-</div>
-</div>
-
-
-
-<!-- Street -->
-<div class="form-row">
-    <div class="form-group col-md-6">
-        <label>Rua:</label>
-        <input type="text" class="form-control" placeholder="Rua...">
-    </div>
-<!-- Number -->
-    <div class="form-group col-md-6">
-        <label>Número</label>
-        <input type="text" class="form-control" placeholder="Número...">
-    </div>
-</div>
-<div class="form-row">
-    <div class="form-group col-md-6">
-        <label>Bairro</label>
-        <input type="text" class="form-control" placeholder="Bairro...">
-    </div>
-    <div class="form-group col-md-6">
-        <label>Complemento</label>
-        <input type="text" class="form-control" placeholder="Complemento...">
-    </div>
-</div>
-</div>

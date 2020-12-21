@@ -4,7 +4,10 @@ import { Fraternity } from '../_models/Fraternity';
 import { FraternityService } from '../_services/fraternity.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { Voluntary } from '../_models/Voluntary';
+
+
+
 
 
 @Component({
@@ -13,36 +16,35 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
   styleUrls: ['./fraternity.component.scss']
 })
 export class FraternityComponent implements OnInit {
+  //Title
+  title: string = 'Fraternidades';
   //fields of general use.
   Fraternities: Fraternity[];
   //Search Filter
   filteredArray: Fraternity[];
   _stringOfFilter: string;
+  vols: Voluntary[];
+
+  //tests
+  frats: Voluntary[];
+
+  getV(): Voluntary[] {
+    return this.Fraternities.map(a => a.voluntary);
+  }
+
+
+
+
 
   //Reactive Forms
-  fb: FormBuilder;
+
   registerForm: FormGroup;
 
 
   constructor(
     private fraternityServices: FraternityService
-    , private formBuilder: FormBuilder
+    , private fb: FormBuilder
   ) { }
-
-  validatorFieldsInForm() {
-    this.registerForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
-      voluntary: ['', [Validators.required]],
-      rua: [['', Validators.required, Validators.minLength(1)]],
-      numero: [['', Validators.required, Validators.minLength(1)]],
-      complemento: [['', Validators.maxLength(150)]],
-      bairro: [['', Validators.required, Validators.minLength(1)]],
-      cidade: [['', Validators.required, Validators.minLength(1)]],
-      uF: ['', Validators.required, Validators.minLength(1)],
-    })
-  }
-
-
 
 
   openModal(template: any) {
@@ -78,7 +80,24 @@ export class FraternityComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.validatorFieldsInForm();
     this.getAllFraternity();
   }
+
+
+
+  validatorFieldsInForm() {
+    this.registerForm = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+      rua: ['', [Validators.required, Validators.maxLength(100)]],
+      numero: ['', [Validators.required, Validators.maxLength(10)]],
+      bairro: ['', [Validators.required, Validators.maxLength(100)]],
+      cidade: ['', [Validators.required, Validators.maxLength(100)]],
+      estado: ['', [Validators.required, Validators.maxLength(60)]],
+      complemento: ['', [Validators.required, Validators.maxLength(500)]]
+    });
+  }
+
+
 
 }

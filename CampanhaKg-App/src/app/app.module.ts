@@ -12,23 +12,29 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr/';
 import { CommonModule } from '@angular/common';
 import { FraternityComponent } from './Fraternity/Fraternity.component';
 import { FraternityService } from './_services/fraternity.service';
 import { CampaignComponent } from './Campaign/Campaign.component';
-import { CampaignComponent } from './campaign/campaign.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { TitleComponent } from './_shared/title/title.component';
+import { FraternityEditComponent } from './fraternity/fraternityEdit/fraternityEdit.component';
+
+
 
 
 @NgModule({
-  declarations: [		
+  declarations: [
     AppComponent,
     VolunteersComponent,
     NavComponent,
     FraternityComponent,
-      CampaignComponent,
-      CampaignComponent
-   ],
+    CampaignComponent,
+    DashboardComponent,
+    TitleComponent,
+    FraternityEditComponent
+  ],
   imports: [
     BrowserAnimationsModule,
     CommonModule,

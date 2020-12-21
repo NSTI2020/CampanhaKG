@@ -36,3 +36,15 @@
       </div>
     </div> 
   </form>
+
+
+  <!-- Voluntary -->
+  <div class="form-group col-md-6">
+    <label>Voluntário</label>
+    <select class="form-control">
+        <option  class="form-control" *ngFor="let vols of getV()" value="{{vols.id}}">
+        {{vols.name}}
+        </option>
+    </select>
+</div>
+</div>

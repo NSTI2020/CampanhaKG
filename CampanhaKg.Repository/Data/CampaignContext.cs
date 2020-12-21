@@ -7,8 +7,6 @@ namespace CampanhaKg.Repository.Data
     public class CampaignContext : DbContext
     {
         public CampaignContext(DbContextOptions<CampaignContext> options) : base(options) { }
-
-        public DbSet<Address> Addresses { get; set; }
         public DbSet<Fraternity> Fraternities { get; set; }
         public DbSet<Voluntary> Volunteers { get; set; }
         public DbSet<Campaign> Campaigns { get; set; }

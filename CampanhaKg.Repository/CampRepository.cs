@@ -79,7 +79,6 @@ namespace CampanhaKg.Repository
         {
             IQueryable<Fraternity> query = _context.Fraternities
             .Include(v => v.Voluntary)
-            .Include(a => a.Address)
             .Include(cc => cc.Campaigns);
 
             query = query.AsNoTracking()
@@ -105,7 +104,7 @@ namespace CampanhaKg.Repository
         public async Task<Voluntary> GetVolunteersByIdAsync(int id)
         {
             IQueryable<Voluntary> query = _context.Volunteers
-            .AsNoTracking().Where(i => i.Id ==id);
+            .AsNoTracking().Where(i => i.Id == id);
             return await query.FirstOrDefaultAsync();
         }
 

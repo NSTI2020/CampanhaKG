@@ -4,29 +4,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CampanhaKg.WebApi.Migrations
 {
-    public partial class teste34232 : Migration
+    public partial class First : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Addresses",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Rua = table.Column<string>(nullable: true),
-                    Numero = table.Column<string>(nullable: true),
-                    Complemento = table.Column<string>(nullable: true),
-                    Bairro = table.Column<string>(nullable: true),
-                    Cidade = table.Column<string>(nullable: true),
-                    UF = table.Column<string>(nullable: true),
-                    ZipCode = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Addresses", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Images",
                 columns: table => new
@@ -65,20 +46,20 @@ namespace CampanhaKg.WebApi.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Rua = table.Column<string>(nullable: true),
+                    Numero = table.Column<string>(nullable: true),
+                    Complemento = table.Column<string>(nullable: true),
+                    Bairro = table.Column<string>(nullable: true),
+                    Cidade = table.Column<string>(nullable: true),
+                    UF = table.Column<string>(nullable: true),
+                    ZipCode = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     VoluntaryId = table.Column<int>(nullable: false),
-                    AddressId = table.Column<int>(nullable: false),
                     photo = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Fraternities", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Fraternities_Addresses_AddressId",
-                        column: x => x.AddressId,
-                        principalTable: "Addresses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Fraternities_Volunteers_VoluntaryId",
                         column: x => x.VoluntaryId,
@@ -143,11 +124,6 @@ namespace CampanhaKg.WebApi.Migrations
                 column: "FraternityId1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Fraternities_AddressId",
-                table: "Fraternities",
-                column: "AddressId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Fraternities_VoluntaryId",
                 table: "Fraternities",
                 column: "VoluntaryId");
@@ -163,9 +139,6 @@ namespace CampanhaKg.WebApi.Migrations
 
             migrationBuilder.DropTable(
                 name: "Fraternities");
-
-            migrationBuilder.DropTable(
-                name: "Addresses");
 
             migrationBuilder.DropTable(
                 name: "Volunteers");

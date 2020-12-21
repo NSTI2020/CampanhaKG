@@ -57,9 +57,11 @@ namespace CampanhaKg.Repository.Data
 
             };
 
-            Address address1 = new Address
+            Fraternity fraternity1 = new Fraternity
             {
                 Id = 1,
+                Name = "Irmã Alcione",
+                Voluntary = voluntary5,
                 Rua = "Rua Fernão Dias",
                 Numero = "2151",
                 Complemento = "",
@@ -68,11 +70,12 @@ namespace CampanhaKg.Repository.Data
                 UF = "Minas Gerais",
                 ZipCode = "30285100",
 
-
             };
-            Address address2 = new Address
+            Fraternity fraternity2 = new Fraternity
             {
                 Id = 2,
+                Name = "Caminhos para jesus",
+                Voluntary = voluntary3,
                 Rua = "Joao gomes",
                 Numero = "211",
                 Complemento = "",
@@ -81,9 +84,11 @@ namespace CampanhaKg.Repository.Data
                 UF = "Minas Gerais",
                 ZipCode = "22222100",
             };
-            Address address3 = new Address
+            Fraternity fraternity3 = new Fraternity
             {
                 Id = 3,
+                Name = "Olhos de luz",
+                Voluntary = voluntary4,
                 Rua = "Charles Bizzet",
                 Numero = "1250",
                 Complemento = "",
@@ -92,9 +97,11 @@ namespace CampanhaKg.Repository.Data
                 UF = "Minas Gerais",
                 ZipCode = "34565220",
             };
-            Address address4 = new Address
+            Fraternity fraternity4 = new Fraternity
             {
                 Id = 4,
+                Name = "Gevan",
+                Voluntary = voluntary1,
                 Rua = "Centralina",
                 Numero = "1064",
                 Complemento = "",
@@ -103,9 +110,11 @@ namespace CampanhaKg.Repository.Data
                 UF = "Minas Gerais",
                 ZipCode = "31080140",
             };
-            Address address5 = new Address
+            Fraternity fraternity5 = new Fraternity
             {
                 Id = 5,
+                Name = "Bezerra de Meneses",
+                Voluntary = voluntary2,
                 Rua = "Maria Felipe de Araújo",
                 Numero = "75",
                 Complemento = "",
@@ -113,43 +122,6 @@ namespace CampanhaKg.Repository.Data
                 Cidade = "Belo Horizonte",
                 UF = "Minas Gerais",
                 ZipCode = "30270470",
-            };
-
-            Fraternity fraternity1 = new Fraternity
-            {
-                Id = 1,
-                Name = "Irmã Alcione",
-                Voluntary = voluntary5,
-                Address = address3
-
-            };
-            Fraternity fraternity2 = new Fraternity
-            {
-                Id = 2,
-                Name = "Caminhos para jesus",
-                Voluntary = voluntary3,
-                Address = address1
-            };
-            Fraternity fraternity3 = new Fraternity
-            {
-                Id = 3,
-                Name = "Olhos de luz",
-                Voluntary = voluntary4,
-                Address = address2
-            };
-            Fraternity fraternity4 = new Fraternity
-            {
-                Id = 4,
-                Name = "Gevan",
-                Voluntary = voluntary1,
-                Address = address5
-            };
-            Fraternity fraternity5 = new Fraternity
-            {
-                Id = 5,
-                Name = "Bezerra de Meneses",
-                Voluntary = voluntary2,
-                Address = address4
             };
 
             Campaign campaign1 = new Campaign()
@@ -228,20 +200,13 @@ namespace CampanhaKg.Repository.Data
             _context.Add(voluntary3);
             _context.Add(voluntary4);
             _context.Add(voluntary5);
-
-            _context.Add(address1);
-            _context.Add(address1);
-            _context.Add(address2);
-            _context.Add(address3);
-            _context.Add(address4);
-
             _context.Add(campaign1);
             _context.Add(campaign2);
             _context.Add(campaign3);
             _context.Add(campaign4);
             _context.Add(campaign5);
 
-            if (_context.Volunteers.Any() && _context.Fraternities.Any() && _context.Addresses.Any())
+            if (_context.Volunteers.Any() && _context.Fraternities.Any())
             {
                 return false;
             }
