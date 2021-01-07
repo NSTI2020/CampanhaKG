@@ -11,11 +11,13 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using CampanhaKg.Domain.models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CampanhaKg.WebApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [AllowAnonymous]
     public class VolsController : ControllerBase
     {
         private readonly ICampRepository _repo;

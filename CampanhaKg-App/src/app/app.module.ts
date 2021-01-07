@@ -12,7 +12,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr/';
+import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { FraternityComponent } from './Fraternity/Fraternity.component';
 import { FraternityService } from './_services/fraternity.service';
@@ -20,6 +20,10 @@ import { CampaignComponent } from './Campaign/Campaign.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TitleComponent } from './_shared/title/title.component';
 import { FraternityEditComponent } from './fraternity/fraternityEdit/fraternityEdit.component';
+import { UserComponent } from './user/user.component';
+import { LoginComponent } from './user/login/login.component';
+import { RegistrationComponent } from './user/registration/registration.component';
+import { AuthService } from './_services/auth.service';
 
 
 
@@ -33,7 +37,10 @@ import { FraternityEditComponent } from './fraternity/fraternityEdit/fraternityE
     CampaignComponent,
     DashboardComponent,
     TitleComponent,
-    FraternityEditComponent
+    FraternityEditComponent,
+    UserComponent,
+    LoginComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -50,8 +57,8 @@ import { FraternityEditComponent } from './fraternity/fraternityEdit/fraternityE
   ],
   providers: [
     VoluntaryService,
-    FraternityService
-
+    FraternityService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

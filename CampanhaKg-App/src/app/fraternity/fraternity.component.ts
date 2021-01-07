@@ -23,10 +23,10 @@ export class FraternityComponent implements OnInit {
   //Search Filter
   filteredArray: Fraternity[];
   _stringOfFilter: string;
-  vols: Voluntary[];
+  //voluntary: Voluntary[];
 
   //tests
-  frats: Voluntary[];
+  //frats: Voluntary[];
 
   getV(): Voluntary[] {
     return this.Fraternities.map(a => a.voluntary);

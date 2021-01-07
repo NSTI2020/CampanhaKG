@@ -99,7 +99,11 @@ Nome deve conter no máximo 100 caracteres.
     <!--Voluntary--->
 <div class="form-group col-md-6">
 <label>Voluntário:</label>
-<input type="text" class="form-control" placeholder="Selecione o voluntário">
+<select class="form-control">
+    <option *ngFor="let vol of Fraternities" value={{vol.voluntary.id}}>
+{{vol.voluntary.name}}
+    </option>
+</select>
 
 </div><!-- /form-group -->
 </div><!-- /form-row -->
