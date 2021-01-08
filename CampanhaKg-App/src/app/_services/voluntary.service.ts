@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Voluntary } from '../_models/Voluntary';
 import { Observable } from 'rxjs';
 import { Image } from '../_models/Image';
@@ -9,13 +9,15 @@ import { Image } from '../_models/Image';
 })
 export class VoluntaryService {
 
-  constructor(private http: HttpClient) { }
 
   baseURL = 'http://localhost:5000/api/vols';
   baseURLImg = 'http://localhost:5000/api/vols/getimg/1';
 
 
   Volunteers: Voluntary;
+
+  constructor(private http: HttpClient) { }
+
 
   GetAllVoluntary(): Observable<Voluntary[]> {
     return this.http.get<Voluntary[]>(this.baseURL);

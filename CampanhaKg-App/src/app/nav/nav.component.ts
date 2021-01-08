@@ -11,7 +11,7 @@ import { AuthService } from '../_services/auth.service';
 export class NavComponent implements OnInit {
 
   constructor(
-    private authService: AuthService
+    public authService: AuthService
     , private router: Router
     , private toastr: ToastrService
   ) { }

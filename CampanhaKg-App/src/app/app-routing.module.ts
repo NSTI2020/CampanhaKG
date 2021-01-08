@@ -7,6 +7,7 @@ import { VolunteersComponent } from './volunteers/volunteers.component';
 import { UserComponent } from './user/user.component';
 import { LoginComponent } from './user/login/login.component';
 import { RegistrationComponent } from './user/registration/registration.component';
+import { AuthGuard } from './auth/auth.guard';
 
 
 const routes: Routes = [
@@ -17,10 +18,10 @@ const routes: Routes = [
         { path: 'registration', component: RegistrationComponent }
       ]
   },
-  { path: 'voluntary', component: VolunteersComponent },
-  { path: 'fraternity', component: FraternityComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'fraternity/:id/edit', component: FraternityEditComponent },
+  { path: 'voluntary', component: VolunteersComponent, canActivate: [AuthGuard] },
+  { path: 'fraternity', component: FraternityComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'fraternity/:id/edit', component: FraternityEditComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: '**', redirectTo: 'dashboard', pathMatch: 'full' },
 

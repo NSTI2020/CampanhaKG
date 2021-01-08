@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { VolunteersComponent } from './volunteers/volunteers.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { VoluntaryService } from './_services/voluntary.service';
 import { NavComponent } from './nav/nav.component';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -24,6 +24,7 @@ import { UserComponent } from './user/user.component';
 import { LoginComponent } from './user/login/login.component';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { AuthService } from './_services/auth.service';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 
 
@@ -58,7 +59,14 @@ import { AuthService } from './_services/auth.service';
   providers: [
     VoluntaryService,
     FraternityService,
-    AuthService
+
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+
+    //AuthService
   ],
   bootstrap: [AppComponent]
 })

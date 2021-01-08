@@ -99,11 +99,15 @@ Nome deve conter no máximo 100 caracteres.
     <!--Voluntary--->
 <div class="form-group col-md-6">
 <label>Voluntário:</label>
-<select class="form-control">
-    <option *ngFor="let vol of Fraternities" value={{vol.voluntary.id}}>
-{{vol.voluntary.name}}
-    </option>
-</select>
+<label>
+    <div *ngFor="let vol of Fraternities">
+      <div *ngIf="authService.decodedToken ?.unique_name == 'marcusmvd'">
+        {{vol.voluntary.name}}
+      </div>
+       
+      
+        </div>
+</label>
 
 </div><!-- /form-group -->
 </div><!-- /form-row -->
@@ -241,3 +245,7 @@ formControlName="estado" placeholder="Estado...">
   </div>
 </div>
     
+<button class="btn btn-success" (click)="checkUserLoggedIn()">TESTES</button>
+<div>
+{{this.jwt.tokenGetter()}}
+</div>

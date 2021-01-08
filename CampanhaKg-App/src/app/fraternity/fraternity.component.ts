@@ -5,6 +5,8 @@ import { FraternityService } from '../_services/fraternity.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Voluntary } from '../_models/Voluntary';
+import { AuthService } from '../_services/auth.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 
 
@@ -23,29 +25,29 @@ export class FraternityComponent implements OnInit {
   //Search Filter
   filteredArray: Fraternity[];
   _stringOfFilter: string;
-  //voluntary: Voluntary[];
+  //Reactive Forms
+  registerForm: FormGroup;
 
-  //tests
-  //frats: Voluntary[];
+  jwt = new JwtHelperService();
+  public decoded: any;
+  constructor(
+    private fraternityServices: FraternityService
+    , private fb: FormBuilder
+    , public authService: AuthService
+  ) { }
 
-  getV(): Voluntary[] {
-    return this.Fraternities.map(a => a.voluntary);
+
+  checkUserLoggedIn() {
+    const user = (localStorage.getItem('token'));
+    this.decoded = this.jwt.decodeToken(user);
+    console.log(this.decoded);
   }
 
 
 
-
-
-  //Reactive Forms
-
-  registerForm: FormGroup;
-
-
-  constructor(
-    private fraternityServices: FraternityService
-    , private fb: FormBuilder
-  ) { }
-
+  getV(): Voluntary[] {
+    return this.Fraternities.map(a => a.voluntary);
+  }
 
   openModal(template: any) {
     template.show();

@@ -17,7 +17,6 @@ namespace CampanhaKg.WebApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [AllowAnonymous]
     public class VolsController : ControllerBase
     {
         private readonly ICampRepository _repo;
