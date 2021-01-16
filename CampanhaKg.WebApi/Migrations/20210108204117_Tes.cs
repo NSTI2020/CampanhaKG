@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CampanhaKg.WebApi.Migrations
 {
-    public partial class init : Migration
+    public partial class Tes : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -43,7 +43,8 @@ namespace CampanhaKg.WebApi.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    FullName = table.Column<string>(type: "nvarchar(150)", nullable: true)
+                    FullName = table.Column<string>(type: "nvarchar(150)", nullable: true),
+                    Contato = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -64,22 +65,6 @@ namespace CampanhaKg.WebApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Images", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Volunteers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    Contato = table.Column<string>(nullable: true),
-                    photo = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Volunteers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -202,16 +187,16 @@ namespace CampanhaKg.WebApi.Migrations
                     UF = table.Column<string>(nullable: true),
                     ZipCode = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    VoluntaryId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
                     photo = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Fraternities", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Fraternities_Volunteers_VoluntaryId",
-                        column: x => x.VoluntaryId,
-                        principalTable: "Volunteers",
+                        name: "FK_Fraternities_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -309,9 +294,9 @@ namespace CampanhaKg.WebApi.Migrations
                 column: "FraternityId1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Fraternities_VoluntaryId",
+                name: "IX_Fraternities_UserId",
                 table: "Fraternities",
-                column: "VoluntaryId");
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -341,13 +326,10 @@ namespace CampanhaKg.WebApi.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Fraternities");
 
             migrationBuilder.DropTable(
-                name: "Volunteers");
+                name: "AspNetUsers");
         }
     }
 }

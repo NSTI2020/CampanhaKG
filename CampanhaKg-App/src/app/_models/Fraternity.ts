@@ -1,6 +1,6 @@
 import { Campaign } from './Campaign';
-import { Voluntary } from './Voluntary';
 import { Address } from './Address';
+import { User } from './User';
 
 export interface Fraternity {
     id: number;
@@ -12,8 +12,8 @@ export interface Fraternity {
     cidade: string;
     uf: string;
     zipcode: string;
-    voluntaryId: number;
-    voluntary: Voluntary;
+    userId: number;
+    user: User;
 
 
 

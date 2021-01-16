@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using CampanhaKg.Domain._visual;
+using CampanhaKg.Domain.Identity;
 using CampanhaKg.Domain.models;
 using CampanhaKg.Repository.Data;
 using Microsoft.EntityFrameworkCore;
@@ -55,7 +56,9 @@ namespace CampanhaKg.Repository
         public async Task<Campaign[]> GetAllCampaignAsync()
         {
             IQueryable<Campaign> query = _context.Campaigns
-            .Include(f => f.Fraternity);
+            .Include(f => f.Fraternity)
+            .ThenInclude(u => u.user);
+
 
             query = query.AsNoTracking()
             .OrderBy(o => o.Neighborhood);
@@ -78,7 +81,7 @@ namespace CampanhaKg.Repository
         public async Task<Fraternity[]> GetAllFraternityAsync()
         {
             IQueryable<Fraternity> query = _context.Fraternities
-            .Include(v => v.Voluntary)
+            .Include(v => v.user)
             .Include(cc => cc.Campaigns);
 
             query = query.AsNoTracking()
@@ -93,17 +96,17 @@ namespace CampanhaKg.Repository
 
 
         //VOLUNTEERS
-        public async Task<Voluntary[]> GetAllVolunteersAsync()
+        public async Task<User[]> GetAllVolunteersAsync()
         {
-            IQueryable<Voluntary> query = _context.Volunteers
+            IQueryable<User> query = _context.Users
             .AsNoTracking()
             .OrderBy(ord => ord.Email);
 
             return await query.ToArrayAsync();
         }
-        public async Task<Voluntary> GetVolunteersByIdAsync(int id)
+        public async Task<User> GetVolunteersByIdAsync(int id)
         {
-            IQueryable<Voluntary> query = _context.Volunteers
+            IQueryable<User> query = _context.Users
             .AsNoTracking().Where(i => i.Id == id);
             return await query.FirstOrDefaultAsync();
         }

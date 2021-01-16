@@ -14,7 +14,21 @@
                     registerForm.get('fullName').touched" class="invalid-feedback">
           Nome Completo é obrigatório.
         </div>
+
       </div>
+
+
+      <div class="form-group">
+        <label for="">Cel/Zap:</label>
+        <input class="form-control" type="text" formControlName="phoneNumber" [ngClass]="{'is-invalid': registerForm.get('phoneNumber').errors &&
+                                     registerForm.get('phoneNumber').touched}" placeholder="Insira zap/cel." />
+        <div *ngIf="registerForm.get('phoneNumber').hasError('required') &&
+                    registerForm.get('phoneNumber').touched" class="invalid-feedback">
+          Zap/Cel é de preenchimento obrigatório.
+        </div>
+      </div>
+
+
       <div class="form-group">
         <label for="">Email:</label>
         <input class="form-control" type="text" formControlName="email" [ngClass]="{ 'is-invalid': registerForm.get('email').errors && 
@@ -40,7 +54,7 @@
       <div formGroupName="passwords">
         <div class="form-group">
           <label>Senha:</label>
-          <input class="form-control" type="password" formControlName="password" [ngClass]="{ 'is-invalid': registerForm.get('passwords.password').errors &&
+          <input class="form-control" type="text" formControlName="password" [ngClass]="{ 'is-invalid': registerForm.get('passwords.password').errors &&
                                        registerForm.get('passwords.password').touched}" placeholder="Digite uma Senha"/>
           <div *ngIf="registerForm.get('passwords.password').hasError('minlength') &&
             registerForm.get('passwords.password').touched" class="invalid-feedback">

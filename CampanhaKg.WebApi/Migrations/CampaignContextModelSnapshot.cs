@@ -57,6 +57,9 @@ namespace CampanhaKg.WebApi.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<string>("Contato")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("Email")
                         .HasColumnType("varchar(256) CHARACTER SET utf8mb4")
                         .HasMaxLength(256);
@@ -255,7 +258,7 @@ namespace CampanhaKg.WebApi.Migrations
                     b.Property<string>("UF")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("VoluntaryId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.Property<string>("ZipCode")
@@ -266,32 +269,9 @@ namespace CampanhaKg.WebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("VoluntaryId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Fraternities");
-                });
-
-            modelBuilder.Entity("CampanhaKg.Domain.models.Voluntary", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Contato")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("photo")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Volunteers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -408,9 +388,9 @@ namespace CampanhaKg.WebApi.Migrations
 
             modelBuilder.Entity("CampanhaKg.Domain.models.Fraternity", b =>
                 {
-                    b.HasOne("CampanhaKg.Domain.models.Voluntary", "Voluntary")
+                    b.HasOne("CampanhaKg.Domain.Identity.User", "user")
                         .WithMany()
-                        .HasForeignKey("VoluntaryId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

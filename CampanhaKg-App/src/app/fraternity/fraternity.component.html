@@ -10,7 +10,7 @@
 
 <!--BUTTON REGISTER-->
 <div>
-    <button type="button" class="form-control btn btn-success" (click)="openModal(modalFraternity)">
+    <button type="button" class="form-control btn btn-success" (click)="newFraternity(modalFraternity)">
         Registrar nova fraternidade
     </button>
 </div>
@@ -30,7 +30,7 @@
             {{fraty.name}}
         </td>
         <td>
-            {{fraty.voluntary.name}}
+            {{fraty.user.userName}}
         </td>
         <td>
             {{fraty.bairro}}
@@ -64,7 +64,7 @@
 </div><!-- /form-group-->
 <div class="form-row">
 <div class="form-group col-md-12">
-<input type="text" class="form-control text-center"
+<input type="text" class="form-control text-center" formControlName="zipcode"
 placeholder="Ao introduzir o cep, os campos Rua, Bairro, Cidade, Estado são automaticamente completados.">
 
 
@@ -97,20 +97,13 @@ Nome deve conter no máximo 100 caracteres.
 
 </div><!-- /form-group -->
     <!--Voluntary--->
-<div class="form-group col-md-6">
-<label>Voluntário:</label>
-<label>
-    <div *ngFor="let vol of Fraternities">
-      <div *ngIf="authService.decodedToken ?.unique_name == 'marcusmvd'">
-        {{vol.voluntary.name}}
-      </div>
-       
-      
-        </div>
-</label>
+    <div class="form-group col-md-6">
+        <label>Voluntário:</label>
+       <input type="text" class="form-control" placeholder="{{_User.fullName}}" disabled>
+
 
 </div><!-- /form-group -->
-</div><!-- /form-row -->
+</div>
 
 
     <!--RUA/NUMERO--->
@@ -193,14 +186,14 @@ formControlName="cidade" placeholder="Cidade...">
 <div class="form-group  col-md-6">
 <label>Estado:</label>
 <input type="text" class="form-control" 
-[ngClass]="{'is-invalid': registerForm.get('estado').errors && registerForm.get('estado').touched}"
-formControlName="estado" placeholder="Estado...">
+[ngClass]="{'is-invalid': registerForm.get('uf').errors && registerForm.get('uf').touched}"
+formControlName="uf" placeholder="Estado...">
 
-<div *ngIf="registerForm.get('estado').hasError('required') && registerForm.get('estado').touched" class="invalid-feedback">
+<div *ngIf="registerForm.get('uf').hasError('required') && registerForm.get('uf').touched" class="invalid-feedback">
   Estado é de preenchimento obrigatório.
 </div>
 
-<div *ngIf="registerForm.get('estado').hasError('maxlength')" class="invalid-feedback">
+<div *ngIf="registerForm.get('uf').hasError('maxlength')" class="invalid-feedback">
     Estado deve conter no máximo 100 caracteres.
 </div>
 
@@ -208,7 +201,7 @@ formControlName="estado" placeholder="Estado...">
     <!--Complemento--->
 <div class="form-group col-md-6">
 <label>Complemento:</label>
-<input type="text" class="form-control">
+<input type="text" class="form-control" formControlName="complemento">
 
 </div><!-- /form-group -->
 </div><!-- /form-row -->
@@ -217,7 +210,7 @@ formControlName="estado" placeholder="Estado...">
 <div class="form-row">
 <!--close button-->
 <div class="form-group col-md-4">
-<button type="button" class="form-control">Fechar</button>
+<button type="button" class="form-control" (click)="modalFraternity.hide()">Fechar</button>
 </div>
 <!--SPACE BETWEEN BUTTONS-->
 <div class="form-gropu col-md-4">
@@ -225,7 +218,7 @@ formControlName="estado" placeholder="Estado...">
 
 <!--sava button-->
 <div class="form-gropu col-md-4">
-<button type="button" class="form-control">Salvar</button>
+    <button type="button" (click)="saveChanges(modalFraternity)">Salvar</button>
 </div>
 
 </div><!-- /form-row -->
@@ -238,14 +231,16 @@ formControlName="estado" placeholder="Estado...">
 <br>
 <div class="modal-footer d-flex">
 </div>
-
-
       </div>
+      <br>
+      <br>
+      <p>Campos: {{registerForm.value | json}}</p>
+      <p>Validação: {{registerForm.valid | json}}</p>
     </div>
   </div>
 </div>
     
 <button class="btn btn-success" (click)="checkUserLoggedIn()">TESTES</button>
 <div>
-{{this.jwt.tokenGetter()}}
+
 </div>

@@ -29,12 +29,20 @@ export class NavComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('token');
-    this.toastr.show('Log Out');
+    //this.toastr.show('Log Out');
     this.router.navigate(['/user/login']);
   }
 
   entrar() {
-    this.router.navigate(['/user/login'])
+    this.router.navigate(['/user/login']);
+  }
+
+  userName() {
+    return sessionStorage.getItem('username');
+  }
+
+  fratRegister() {
+    return sessionStorage.getItem('id');
   }
 
 

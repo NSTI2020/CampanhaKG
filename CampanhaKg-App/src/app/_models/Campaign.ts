@@ -1,7 +1,13 @@
+import { Fraternity } from "./Fraternity";
+import { User } from "./User";
+
 export interface Campaign {
     id: number;
     fraternityId: number;
-    dateTime: Date;
+    fraternity: Fraternity;
+    userId: number;
+    user: User;
+    date: Date;
     region: string;
     neighborhood: string;
     street01: string;
@@ -19,4 +25,5 @@ export interface Campaign {
     street013: string;
     street014: string;
     street015: string;
+
 }

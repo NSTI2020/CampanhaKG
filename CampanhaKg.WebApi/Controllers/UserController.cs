@@ -45,6 +45,9 @@ namespace CampanhaKg.WebApi.Controllers
             return Ok(new UserDto());
         }
 
+
+
+
         [HttpPost("Register")]
         [AllowAnonymous]
         public async Task<IActionResult> Register(UserDto userDto)

@@ -6,8 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./fraternityEdit.component.scss']
 })
 export class FraternityEditComponent implements OnInit {
-  title: string = 'Fraternidade Edit';
-
 
   constructor() { }
 

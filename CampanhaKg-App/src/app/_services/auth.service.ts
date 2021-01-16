@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { map } from 'rxjs/operators';
+import { User } from '../_models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,8 @@ export class AuthService {
           if (user) {
             localStorage.setItem('token', user.token);
             this.decodedToken = this.jwtHelper.decodeToken(user.token);
+            sessionStorage.setItem('username', this.decodedToken.unique_name);
+            sessionStorage.setItem('id', this.decodedToken.nameid);
           }
 
         })
@@ -30,7 +33,7 @@ export class AuthService {
 
   }
 
-  register(model: any) {
+  register(model: User) {
     return this.http.post(`${this.baseURL}register`, model);
   }
 
