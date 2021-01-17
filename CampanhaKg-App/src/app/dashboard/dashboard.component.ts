@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Campaign } from '../_models/Campaign';
 import { CampaignService } from '../_services/campaign.service';
+import { DashboardService } from '../_services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class DashboardComponent implements OnInit {
 
@@ -15,7 +17,13 @@ export class DashboardComponent implements OnInit {
   //search field
   CampaignsFiltered: Campaign[];
   _filterString: string;
+  //check frater has Exists
+  flag: boolean = false;
 
+  constructor(
+    private campaignService: CampaignService
+    , private dashBoardService: DashboardService
+  ) { }
 
   get filterList(): string {
     return this._filterString;
@@ -35,10 +43,10 @@ export class DashboardComponent implements OnInit {
       campaign.neighborhood.toLocaleLowerCase().indexOf(filterBy) !== -1);
   }
 
-  constructor(private Service: CampaignService) { }
+
 
   getAll() {
-    this.Service.getAll().subscribe(
+    this.campaignService.getAll().subscribe(
       (_return: Campaign[]) => {
         this.Campaigns = _return;
         this.CampaignsFiltered = _return;
@@ -51,11 +59,26 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+  CheckRegisteredFrater() {
+    const id = sessionStorage.getItem('id');
 
+    this.dashBoardService.checkUsrRegistredFraternity(parseInt(id)).subscribe(
+      (_bool: boolean) => {
+        this.flag = _bool;
+        console.log(_bool);
+
+      }, error => {
+        console.log(error);
+      }
+    );
+
+
+  }
 
 
   ngOnInit() {
     this.getAll();
+    this.CheckRegisteredFrater();
   }
 
 

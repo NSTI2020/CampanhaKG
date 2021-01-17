@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../_services/auth.service';
+import { NavService } from '../_services/nav.service';
+
 
 @Component({
   selector: 'app-nav',
@@ -14,9 +16,11 @@ export class NavComponent implements OnInit {
     public authService: AuthService
     , private router: Router
     , private toastr: ToastrService
+    , private navService: NavService
   ) { }
 
   ngOnInit() {
+
   }
 
   loggedIn() {
@@ -41,9 +45,7 @@ export class NavComponent implements OnInit {
     return sessionStorage.getItem('username');
   }
 
-  fratRegister() {
-    return sessionStorage.getItem('id');
-  }
+
 
 
 }

@@ -59,25 +59,48 @@ namespace CampanhaKg.WebApi.Controllers
             return BadRequest();
         }
 
+        ///Get id user for creating fraternity
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
             try
             {
                 var users = _contextUsers.Users;
-                User user = await users.FirstOrDefaultAsync(u => u.Id == id);
+                User user = await users.SingleAsync(u => u.Id == id);
                 return Ok(user);
             }
             catch (System.Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"A base de dados falou ou usuário não existe! erro: {ex.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"A base de dados falhou ou usuário não existe! erro: {ex.Message}");
             }
 
         }
 
+        //Return true or false if user already register fraternity return true.
+        [HttpGet("{usrid}/Registred")]
+        [AllowAnonymous]
+        public async Task<IActionResult> UsrHas(int usrid)
+        {
+            try
+            {
+                Fraternity[] fraternities = await _repo.GetAllFraternityAsync();
 
+                var result = fraternities.Single(u => u.UserId == usrid);
 
+                if (result != null)
+                {
+                    return Ok(true);
 
+                }
 
+                return Ok(false);
+
+            }
+            catch (System.Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"A base de dados falhou ou usuário não existe! erro: {ex.Message}");
+            }
+
+        }
     }
 }

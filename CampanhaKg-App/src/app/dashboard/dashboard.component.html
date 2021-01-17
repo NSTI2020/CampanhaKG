@@ -1,50 +1,60 @@
-<app-title  [title]="title"></app-title>
+<app-title [title]="title"></app-title>
 <hr>
-<div class="form-inline mr-auto">
-  <div class="form-group mb-2">
-    <label class="mr-2" class="fas fa-search fa-2x">&nbsp; &nbsp;</label>
-    <input type="text" class="form-control mr-2" placeholder="Busca por bairro." [(ngModel)]="filterList">
+
+<div class="form-inline col-md-12 alert alert-info clearfix">
+  <a class="form-group col-md-1"></a>
+
+  <div class="form-group">
+
+    <label class="fas fa-search fa-2x">&nbsp; &nbsp;</label>
+    <input type="text" class="form-control" placeholder="Busca por bairro." [(ngModel)]="filterList">
     <h3>&nbsp;{{filterList}}</h3>
   </div>
+  <a class="form-group col-md-6"></a>
+  <button *ngIf="!flag" class="btn btn-success float-right">Registrar</button>
 </div>
 
 
-  <table class="table table-striped">
-    <thead thead-light>
-      <tr>
-        <th>
-          BAIRRO:
-        </th>
-        <th>
-          DATA:
-        </th>
-        <th>
-          FRATERNIDADE:
-        </th>
-        <th>
-          RESPONSÁVEL:
-        </th>
-        <th>
-          CONTATO:
-        </th>
-      </tr>
-    </thead>
-    <tbody *ngFor="let camps of CampaignsFiltered">
-      <td>
-        {{camps.neighborhood}}
-      </td>
-      <td>
-        {{camps.date}}
-      </td>
-      <td>
-        {{camps.fraternity.name}}
-      </td>
-      <td>
-        {{camps.fraternity.user.userName}}
-      </td>
-      <td>
-        {{camps.fraternity.user.phoneNumber}}
-      </td>
-    </tbody>
-  </table>
-
+<table class="table table-striped">
+  <thead thead-light>
+    <tr>
+      <th>
+        BAIRRO:
+      </th>
+      <th>
+        DATA:
+      </th>
+      <th>
+        FRATERNIDADE:
+      </th>
+      <th>
+        RESPONSÁVEL:
+      </th>
+      <th>
+        CONTATO:
+      </th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let camps of CampaignsFiltered">
+    <td>
+      {{camps.neighborhood}}
+    </td>
+    <td>
+      {{camps.date}}
+    </td>
+    <td>
+      {{camps.fraternity.name}}
+    </td>
+    <td>
+      {{camps.fraternity.user.fullName}}
+    </td>
+    <td>
+      {{camps.fraternity.user.phoneNumber}}
+    </td>
+    <td>
+      <div class="btn-group">
+        <button type="button" class="btn btn-sm btn-info fa fa-edit" tooltip="Editar Campanha."> </button>
+      </div>
+    </td>
+  </tbody>
+</table>
