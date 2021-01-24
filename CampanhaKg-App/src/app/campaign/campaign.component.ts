@@ -6,7 +6,7 @@ import { FraternityService } from '../_services/fraternity.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Fraternity } from '../_models/Fraternity';
-import { Template } from '@angular/compiler/src/render3/r3_ast';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 
 
 
@@ -59,14 +59,15 @@ export class CampaignComponent implements OnInit {
 
 
   constructor(
-    private CampaignService: CampaignService
+    private campaignService: CampaignService
     , private bsModalService: BsModalService
+    , private formBuilder: FormBuilder
   ) { }
 
 
   //#region Methods
   getCampaignsByFraternityID(FraternityId: number) {
-    this.CampaignService.getCampaignByFraternityId(FraternityId).subscribe
+    this.campaignService.getCampaignByFraternityId(FraternityId).subscribe
       (
         (_campaign: Campaign[]) => {
           this.CampaignsByFraternityId = _campaign;
@@ -86,10 +87,46 @@ export class CampaignComponent implements OnInit {
 
   //#endregion
 
+  //#endregion FormValidation
+  formValidation() {
+    this.formBuilder.group({
+      fraternityId: ['', Validators.required],
+      date: ['', Validators.required],
+      region: [['', Validators.required, Validators.minLength(3), Validators.max(55)]],
+      neighborhood: [['', Validators.required, Validators.minLength(3), Validators.max(155)]],
+      street01: [['', Validators.required, Validators.minLength(3), Validators.max(355)]],
+      street02: ['',],
+      street03: ['',],
+      street04: ['',],
+      street05: ['',],
+      street06: ['',],
+      street07: ['',],
+      street08: ['',],
+      street09: ['',],
+      street010: ['',],
+      street011: ['',],
+      street012: ['',],
+      street013: ['',],
+      street014: ['',],
+      street015: ['',],
+    })
+  }
+  //#endregion
+
+
+
+
+
+
+
+
 
   ngOnInit(): void {
+    //formValidation
+    this.formValidation();
 
-    this.CampaignService.getFraternityByUserId(this._UserId)
+
+    this.campaignService.getFraternityByUserId(this._UserId)
       .then((_Fraternity: Fraternity) => {
         this.FraternityByUserId = _Fraternity
         this.getCampaignsByFraternityID(this.FraternityByUserId.id)

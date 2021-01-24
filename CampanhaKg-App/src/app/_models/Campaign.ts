@@ -5,8 +5,6 @@ export interface Campaign {
     id: number;
     fraternityId: number;
     fraternity: Fraternity;
-    userId: number;
-    user: User;
     date: Date;
     region: string;
     neighborhood: string;

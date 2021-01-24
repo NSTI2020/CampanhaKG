@@ -11,7 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { NgxMaskModule } from 'ngx-mask';
-
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 
 
 import { FraternityComponent } from './Fraternity/Fraternity.component';
@@ -25,6 +25,7 @@ import { RegistrationComponent } from './user/registration/registration.componen
 
 import { CampaignComponent } from './campaign/campaign.component';
 import { CampaignEditComponent } from '../app/campaign/campaignEdit/campaignEdit.component';
+
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TitleComponent } from './_shared/title/title.component';
@@ -65,6 +66,7 @@ import { NavService } from './_services/nav.service';
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
+    AccordionModule.forRoot(),
     BrowserAnimationsModule,
     CommonModule,
     BrowserModule,
