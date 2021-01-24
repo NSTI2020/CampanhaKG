@@ -14,14 +14,10 @@ export class FraternityService {
   Fraternity: Fraternity[];
 
   baseURL: string = 'http://localhost:5000/api/fraternities';
-  baseUrlUsers: string = 'http://localhost:5000/api/user';
+
 
   getAllFraternity(): Observable<Fraternity[]> {
     return this.http.get<Fraternity[]>(this.baseURL);
-  }
-
-  getUserById(id: number): Observable<User> {
-    return this.http.get<User>(`${this.baseURL}/${id}`);
   }
 
   post(frat: Fraternity) {

@@ -40,7 +40,7 @@
       {{camps.neighborhood}}
     </td>
     <td>
-      {{camps.date}}
+      {{camps.date | DateTime}}
     </td>
     <td>
       {{camps.fraternity.name}}
@@ -50,11 +50,6 @@
     </td>
     <td>
       {{camps.fraternity.user.phoneNumber}}
-    </td>
-    <td>
-      <div class="btn-group">
-        <button type="button" class="btn btn-sm btn-info fa fa-edit" tooltip="Editar Campanha."> </button>
-      </div>
     </td>
   </tbody>
 </table>

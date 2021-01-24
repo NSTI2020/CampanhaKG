@@ -137,6 +137,29 @@ namespace CampanhaKg.WebApi.Controllers
 
 
         }
+
+
+
+        ///Get id user for find fraternity
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            try
+            {
+                var users = _userManager.Users;
+                User user = await users.SingleAsync(u => u.Id == id);
+                return Ok(user);
+            }
+            catch (System.Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"A base de dados falhou ou usuário não existe! erro: {ex.Message}");
+            }
+
+        }
+
+
+
+
     }
 
 }

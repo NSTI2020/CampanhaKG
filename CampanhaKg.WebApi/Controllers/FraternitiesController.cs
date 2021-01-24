@@ -13,14 +13,13 @@ namespace CampanhaKg.WebApi.Controllers
 {
     [ApiController]
     [Route("api/{controller}")]
+    [AllowAnonymous]
     public class FraternitiesController : ControllerBase
     {
         public readonly ICampRepository _repo;
-        public readonly UserManager<User> _contextUsers;
         public FraternitiesController(ICampRepository repo, UserManager<User> contextUsers)
         {
             _repo = repo;
-            _contextUsers = contextUsers;
         }
         [HttpGet]
         public async Task<IActionResult> Get()
@@ -59,26 +58,9 @@ namespace CampanhaKg.WebApi.Controllers
             return BadRequest();
         }
 
-        ///Get id user for creating fraternity
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
-        {
-            try
-            {
-                var users = _contextUsers.Users;
-                User user = await users.SingleAsync(u => u.Id == id);
-                return Ok(user);
-            }
-            catch (System.Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"A base de dados falhou ou usuário não existe! erro: {ex.Message}");
-            }
-
-        }
 
         //Return true or false if user already register fraternity return true.
         [HttpGet("{usrid}/Registred")]
-        [AllowAnonymous]
         public async Task<IActionResult> UsrHas(int usrid)
         {
             try
@@ -90,9 +72,7 @@ namespace CampanhaKg.WebApi.Controllers
                 if (result != null)
                 {
                     return Ok(true);
-
                 }
-
                 return Ok(false);
 
             }
@@ -100,7 +80,17 @@ namespace CampanhaKg.WebApi.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"A base de dados falhou ou usuário não existe! erro: {ex.Message}");
             }
-
         }
+
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> Get(int userId)
+        {
+            Fraternity[] fraternities = await _repo.GetAllFraternityAsync();
+            Fraternity result = fraternities.Single(f => f.UserId == userId);
+
+            return Ok(result);
+        }
+
+
     }
 }

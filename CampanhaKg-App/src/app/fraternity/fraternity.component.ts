@@ -49,26 +49,6 @@ export class FraternityComponent implements OnInit {
   ) { }
 
 
-  checkUserLoggedIn() {
-
-    const user = (localStorage.getItem('token'));
-    this.decoded = this.jwt.decodeToken(user);
-    this.Id = this.decoded?.nameid;
-    this.getUserById(this.Id)
-    //console.log(this._User);
-    return sessionStorage.getItem('username');
-  }
-
-  getUserById(id: number): void {
-    this.fraternityServices.getUserById(id).subscribe((_user: User) => {
-      this._User = _user;
-      // console.log(_user);
-    }), error => {
-      //console.log(error);
-    }
-
-
-  }
 
   newFraternity(template: any) {
     this.saveMode = 'post';
@@ -88,7 +68,8 @@ export class FraternityComponent implements OnInit {
 
   //Get all fraternities registers
   getAllFraternity() {
-    this.fraternityServices.getAllFraternity().subscribe((_fraternity: Fraternity[]) => {
+    this.fraternityServices.getAllFraternity
+      ().subscribe((_fraternity: Fraternity[]) => {
       this.Fraternities = _fraternity;
       console.log();
 
@@ -158,7 +139,6 @@ export class FraternityComponent implements OnInit {
 
   ngOnInit() {
     this.validatorFieldsInForm();
-    this.checkUserLoggedIn();
     this.getAllFraternity();
   }
 

@@ -33,6 +33,9 @@ import { NavComponent } from './nav/nav.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { CampaignService } from './_services/campaign.service';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { DateTimePipe } from './_helps/DateTime.pipe';
+import { DashboardService } from './_services/dashboard.service';
+import { NavService } from './_services/nav.service';
 
 
 
@@ -48,6 +51,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     DashboardComponent,
     TitleComponent,
     NavComponent,
+    DateTimePipe,
 
     UserComponent,
     ProfileComponent,
@@ -72,6 +76,12 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
   providers: [
     FraternityService,
     CampaignService,
+    //????????????? abaixo
+
+    AuthInterceptor,
+    DashboardService,
+    NavService,
+
 
     {
       provide: HTTP_INTERCEPTORS,
